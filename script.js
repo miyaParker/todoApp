@@ -17,11 +17,15 @@ var s,
             updateBtn : query('.updateBtn'),
             listId: 1,
             editedlistItem:'',
+            editBox:query('.editBox')
         },
         init() {
             s = this.settings
             view.init()
             this.bindEvents()
+        },
+        tasksCompleted(){
+
         },
         bindEvents() {
             s.newTask.addEventListener('click', todo.getInput)
@@ -30,18 +34,28 @@ var s,
                     todo.getInput()
                 }
             });
+            s.editBox.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    const itemArray = s.list.filter(task => task.id === +s.listId)
+                    itemArray[0].description = event.target.value
+                    s.editBox.classList.add('hidden')
+                    s.editedlistItem.innerText = event.target.value
+                    localStorage.setItem('task-list', JSON.stringify(s.list))
+                }
+            });
             s.updateBtn.addEventListener('click', todo.inputUpdate)
         },
         edit() {
-            query('.editBox').classList.remove('hidden')
-            query('.inputEdit').value = event.target.previousSibling.innerText
+            const editBox = query('.editBox').classList.remove('hidden')
+            query('.inputEdit').value = event.target.previousSibling.innerText.toLowerCase()
+            query('.inputEdit').focus()
             s.listId = event.target.previousSibling.id
             s.editedlistItem = event.target.previousSibling
         },
         inputUpdate() {
             const itemArray = s.list.filter(task => task.id === +s.listId)
             itemArray[0].description = event.target.previousElementSibling.value
-            query('.editBox').classList.add('hidden')
+            s.editBox.classList.add('hidden')
             s.editedlistItem.innerText = event.target.previousElementSibling.value
             localStorage.setItem('task-list', JSON.stringify(s.list))
         },
@@ -65,7 +79,7 @@ var s,
         },
         deleteTask(id) {
             s.list.forEach(task => {
-                if (task.id == id) {
+                if (task.id === +id) {
                     let index = s.list.indexOf(task)
                     s.list.splice(+index, 1)
                 }
@@ -123,6 +137,7 @@ const view = {
             item.classList.remove('checked')
             check.classList.add('hidden')
         }
+        listDiv.id = task.id
         listDiv.appendChild(checkBox)
         listDiv.appendChild(check)
         listDiv.appendChild(item)
@@ -150,7 +165,7 @@ const view = {
         }
     },
     deleteListItem(event) {
-        const id = event.target.previousSibling.id
+        const id = event.target.parentElement.id
         event.target.parentElement.remove()
         todo.deleteTask(id)
     },
