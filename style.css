@@ -30,6 +30,7 @@ button:hover{
     color: #0B0909;
 }
 li{
+    align-self: center;
     line-height: 2rem;
     width: 40rem;
     cursor: pointer;
@@ -55,9 +56,8 @@ input{
     border-radius: .5rem;
     text-transform: capitalize;
     padding: .7rem 2rem;
-    display: grid;
-    grid-template-columns:1fr 27fr 1fr 1fr;
-    justify-content: start;
+    display: flex;
+    justify-content: space-between;
 }
 .list-div:hover{
   background-color: rgb(44, 44, 48);
@@ -71,6 +71,7 @@ input{
 }
 button,.delete-btn,.edit{
     cursor: pointer;
+     align-self: center;
 }
 .checkbox,.checkmark{
     height: 2rem;
@@ -100,6 +101,7 @@ button,.delete-btn,.edit{
  
 }
 .updateBtn{
+    align-self: center;
     background-color: rgb(44, 44, 48);
     color: #ffffff;
     margin-left: 2rem;
