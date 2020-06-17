@@ -12,7 +12,11 @@ var s,
             newTask: query('.new-task'),
             taskList: query('.task-list'),
             deleteBtn: query('.delete-btn'),
-            emptyList: query('.empty-list')
+            emptyList: query('.empty-list'),
+            edit: queryAll('.edit'),
+            updateBtn : query('.updateBtn'),
+            listId: 1,
+            editedlistItem:'',
         },
         init() {
             s = this.settings
@@ -21,6 +25,25 @@ var s,
         },
         bindEvents() {
             s.newTask.addEventListener('click', todo.getInput)
+            s.inputBox.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    todo.getInput()
+                }
+            });
+            s.updateBtn.addEventListener('click', todo.inputUpdate)
+        },
+        edit() {
+            query('.editBox').classList.remove('hidden')
+            query('.inputEdit').value = event.target.previousSibling.innerText
+            s.listId = event.target.previousSibling.id
+            s.editedlistItem = event.target.previousSibling
+        },
+        inputUpdate() {
+            const itemArray = s.list.filter(task => task.id === +s.listId)
+            itemArray[0].description = event.target.previousElementSibling.value
+            query('.editBox').classList.add('hidden')
+            s.editedlistItem.innerText = event.target.previousElementSibling.value
+            localStorage.setItem('task-list', JSON.stringify(s.list))
         },
         getInput() {
             userInput = s.inputBox.value
@@ -36,7 +59,7 @@ var s,
             }
             const newTask = new Task(text)
             view.render(newTask)
-            s.list.unshift(newTask)
+            s.list.push(newTask)
             this.showEmptyList()
             localStorage.setItem('task-list', JSON.stringify(s.list))
         },
@@ -53,7 +76,6 @@ var s,
             for (let index = 0; index < s.list.length; index++) {
                 if (s.list[index].id === +id) {
                     s.list[index].completed = completed
-                    console.log(s.list[index])
                 }
             }
             localStorage.setItem('task-list', JSON.stringify(s.list))
@@ -67,20 +89,6 @@ var s,
         }
     }
 
-const config = { childList: true }
-const callback = function (mutationsList, observer) {
-    for (let mutation of mutationsList) {
-        if (mutation.type === 'childList') {
-            console.log('a childNode has been added or removed')
-        }
-    }
-}
-const observer = new MutationObserver(callback)
-observer.observe(todo.settings.taskList, config)
-observer.disconnect();
-
-//observables
-
 const view = {
     init() {
         todo.showEmptyList()
@@ -92,7 +100,6 @@ const view = {
     render(task) {
         s.inputBox.value = ''
         const listDiv = create('div')
-
         listDiv.classList.add('list-div')
         deleteBtn = create('img')
         deleteBtn.addEventListener('click', view.deleteListItem)
@@ -105,16 +112,23 @@ const view = {
         checkBox.src = "./images/checkbox.png"
         let check = create('img')
         check.src = src = "./images/checkmark.png"
-        check.classList.add('check')
-        if (task.completed === false) {
-            check.classList.add('hidden')
+        check.classList.add('checkmark')
+        item.classList.add('checked')
+        let edit = create('img')
+        edit.src = "./images/edit.png"
+        edit.classList.add('edit')
+        edit.addEventListener('click', todo.edit)
 
+        if (task.completed === false) {
+            item.classList.remove('checked')
+            check.classList.add('hidden')
         }
         listDiv.appendChild(checkBox)
         listDiv.appendChild(check)
         listDiv.appendChild(item)
+        listDiv.appendChild(edit)
         listDiv.appendChild(deleteBtn)
-        s.taskList.appendChild(listDiv)
+        s.taskList.prepend(listDiv)
     },
     createListItem(task) {
         let listItem = create('li')
@@ -125,17 +139,15 @@ const view = {
     },
     checkTask(event) {
         const id = event.target.id
-        const item = query('li')
-
         if (event.target.previousSibling.classList.contains('hidden')) {
             event.target.previousSibling.classList.remove('hidden')
             todo.updateTask(id, true)
-            item.classList.add('checked')
+            event.target.classList.add('checked')
         } else {
             event.target.previousSibling.classList.add('hidden')
             todo.updateTask(id, false)
+            event.target.classList.remove('checked')
         }
-
     },
     deleteListItem(event) {
         const id = event.target.previousSibling.id
