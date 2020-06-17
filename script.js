@@ -44,9 +44,16 @@ var s,
                 }
             });
             s.updateBtn.addEventListener('click', todo.inputUpdate)
+            query('.reset').addEventListener('click',todo.reset)
+            query('#close-editBox').addEventListener('click',()=> query('.editBox').classList.add('hidden'))
+        },
+        reset(){
+            s.taskList.innerHTML = ' '
+            s.list = []
+            localStorage.setItem('task-list', JSON.stringify(s.list))
         },
         edit() {
-            const editBox = query('.editBox').classList.remove('hidden')
+            query('.editBox').classList.remove('hidden')
             query('.inputEdit').value = event.target.previousSibling.innerText.toLowerCase()
             query('.inputEdit').focus()
             s.listId = event.target.previousSibling.id
@@ -85,6 +92,9 @@ var s,
                 }
             })
             localStorage.setItem('task-list', JSON.stringify(s.list))
+            if(s.list.length === 0){
+                s.emptyList.classList.remove('hidden')
+            }
         },
         updateTask(id, completed) {
             for (let index = 0; index < s.list.length; index++) {
