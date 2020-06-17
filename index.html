@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>Taskly</title>
+</head>
+
+<body>
+    <main>
+       
+        <section class="todo">
+            <section class="modal">
+                <h1>Taskly</h1>
+                <div class="add">
+                    <input id="input-box" autofocus
+                    placeholder="What do you want to do today?"/>
+                <button class="new-task">Add</button>
+                </div>
+             
+            </section>
+            <div class="center-things">
+                <div class="empty-list hidden">
+                    <p>Your list is empty. Add a todo</p>
+                </div>
+                <div>
+                    <span id="day"></span>
+                    <span id="date"></span>
+                </div>
+            </div>
+            <div class="app-body">
+                <ul class="task-list">
+
+                </ul>
+            </div>
+                                     
+        </section>
+
+    </main>
+    <script src="./script.js"></script>
+</body>
+
+</html>
