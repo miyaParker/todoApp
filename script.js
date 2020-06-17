@@ -51,6 +51,7 @@ var s,
             s.taskList.innerHTML = ' '
             s.list = []
             localStorage.setItem('task-list', JSON.stringify(s.list))
+            s.emptyList.classList.remove('hidden')
         },
         edit() {
             query('.editBox').classList.remove('hidden')
