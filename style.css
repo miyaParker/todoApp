@@ -123,6 +123,9 @@ button,.delete-btn,.edit{
 .empty-list{
     text-align: center;
 }
+input:focus, button:focus, p:focus{
+    outline: none !important;
+}
 #close-editBox{
     cursor: pointer;
     position: absolute;
