@@ -2,6 +2,7 @@
 *{
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
 }
 body{
     font-family: 'Noto Sans JP', sans-serif;
@@ -15,10 +16,12 @@ h1{
     margin-bottom: 1rem;
 }
 button{
+    width: 18%;
     font-size: .87rem;
     font-family: 'Noto Sans JP', sans-serif;
     text-transform: capitalize;
-    padding: .8rem 3rem;
+    text-align: center;
+    padding: 1rem;
     border:none;
     border-radius: .5rem;
     background-color:#ffffff;
@@ -32,30 +35,32 @@ button:hover{
 li{
     align-self: center;
     line-height: 2rem;
-    width: 40rem;
+    width: 100%;
+    padding: 0 2rem;
     cursor: pointer;
     list-style: none;
 }
-
 input{
     text-transform: capitalize;
-    width: 81%;
+    width: 60%;
     font-family: 'Noto Sans JP', sans-serif;
     border-radius: .5rem;
     border: none;
-    padding: 1rem 2rem;
-    margin: 0 auto;
+    padding: 1rem;
+    margin-right: 2%;
     color: rgb(44, 44, 48);
 }
-.add{
+section{
+    width: 100%;
+}
+#add{
     display: flex;
+    justify-content: center;
     margin-bottom: 2rem;
 }
 .list-div{
-    margin: .3rem 0;
-    border-radius: .5rem;
     text-transform: capitalize;
-    padding: .7rem 2rem;
+    padding: .7rem ;
     display: flex;
     justify-content: space-between;
 }
@@ -65,9 +70,8 @@ input{
 .hidden{
     display: none;
 }
-.todo{
-    width: 70rem;
-    margin: 0 auto;
+.edit{
+    padding: 0 1rem;
 }
 button,.delete-btn,.edit{
     cursor: pointer;
@@ -112,6 +116,10 @@ button,.delete-btn,.edit{
     height: 3rem;
     margin: 0;
 }
+#task-list{
+    margin: 0 auto;
+    width: 80%;
+}
 .reset{
     height: 1rem;
     position: fixed;
@@ -139,4 +147,10 @@ input:focus, button:focus, p:focus{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+@media only screen and (max-width: 768px) {
+input{
+    /* width: 100%; */
+    
+}
 }

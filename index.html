@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <main>
+    <main class="unselectable">
         <div class="hidden editBox">
             <img src="./images/delete.png" id="close-editBox">
             <div  class='editDiv'>
@@ -18,31 +18,31 @@
                 <button class="updateBtn">update</button>
             </div>
             
-        </div>
-      
-        <section class="todo">
-            <section class="modal">
+        </div>      
+        <section>
+            <section>
                 <h1>Tasklee</h1>
-                <div class="add">
+                <div id="add">
                     <input id="input-box" autofocus placeholder="What do you want to do today?" maxlength="120"/>
                 <button class="new-task">Add</button>
                 </div>
-                <div class="reset">
-                    <img src="./images/reset.png">
-                    <span>reset</span>
-                 </div>
+               
             </section>
+            <div class="reset">
+                <img src="./images/reset.png">
+                <span>reset</span>
+             </div>
             <div class="center-things">
                 <div class="empty-list hidden">
-                    <p class="unselectable">Your list is empty. Add a todo</p>
+                    <p >Your list is empty. Add a todo</p>
                 </div>
                 <div>
                     <span id="day"></span>
                     <span id="date"></span>
                 </div>
             </div>
-            <div class="app-body">
-                <ul class="task-list">
+            <div id="app-body">
+                <ul id="task-list">
 
                 </ul>
             </div>
