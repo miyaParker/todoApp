@@ -120,14 +120,6 @@ button,.delete-btn,.edit{
     margin: 0 auto;
     width: 80%;
 }
-.reset{
-    height: 1rem;
-    position: fixed;
-    top:80%;
-    left: 90%;
-    right:10%;
-    cursor: pointer;
-}
 .empty-list{
     text-align: center;
 }
