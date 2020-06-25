@@ -35,7 +35,6 @@ button:hover{
 li{
     align-self: center;
     line-height: 2rem;
-    width: 100%;
     padding: 0 2rem;
     cursor: pointer;
     list-style: none;
@@ -61,10 +60,11 @@ section{
 .list-div{
     text-transform: capitalize;
     padding: .7rem ;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 9fr 1fr 1fr;
 }
 .list-div:hover{
+    border-radius: .5rem;
   background-color: rgb(44, 44, 48);
 }
 .hidden{
@@ -123,9 +123,9 @@ button,.delete-btn,.edit{
 .reset{
     height: 1rem;
     position: fixed;
-    top:89%;
-    left: 94%;
-    right:2rem;
+    top:80%;
+    left: 90%;
+    right:10%;
     cursor: pointer;
 }
 .empty-list{
@@ -150,7 +150,7 @@ input:focus, button:focus, p:focus{
 }
 @media only screen and (max-width: 768px) {
 input{
-    /* width: 100%; */
+     width: 50%;
     
 }
 }

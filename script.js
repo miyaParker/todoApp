@@ -66,7 +66,7 @@ var s,
             s.editBox.classList.add('hidden')
             s.editedlistItem.innerText = event.target.previousElementSibling.value
             localStorage.setItem('task-list', JSON.stringify(s.list))
-        },
+        }, 
         getInput() {
             userInput = s.inputBox.value
             if (userInput) {
